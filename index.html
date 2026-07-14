@@ -89,7 +89,7 @@
                 <div class="card card-custom p-4">
                     <div class="d-flex align-items-center mb-3">
                         <i class="bi bi-book fs-3 text-primary me-2"></i>
-                        <h5 class="mb-0 fw-bold">Phần 2: Danh sách lớp & Tổ hợp môn</h5>
+                        <h5 class="mb-0 fw-bold">Phần 2: Danh sách lớp và tổ hợp môn</h5>
                     </div>
                     <hr class="mt-0 mb-3 text-muted">
                     <div class="table-responsive">
@@ -136,7 +136,7 @@
                         </div>
                         <hr class="my-4">
                         <button type="button" onclick="luuNguyenVong()" class="btn btn-success btn-custom w-100 fs-5" id="btnSubmit">
-                            <i class="bi bi-cloud-arrow-up me-2"></i> Lưu Nguyện Vọng
+                            <i class="bi bi-cloud-arrow-up me-2"></i> Lưu nguyện vọng
                         </button>
                     </form>
                 </div>
@@ -183,7 +183,7 @@
                 </ul>
             </div>
             <div class="modal-footer justify-content-center border-0 pb-4 pt-0">
-                <button type="button" class="btn btn-primary btn-custom px-5 rounded-pill text-white" data-bs-dismiss="modal">Đã hiểu & Đóng</button>
+                <button type="button" class="btn btn-primary btn-custom px-5 rounded-pill text-white" data-bs-dismiss="modal">Đóng</button>
             </div>
         </div>
     </div>
@@ -353,7 +353,7 @@
                 var successModal = new bootstrap.Modal(document.getElementById('successModal'));
                 successModal.show();
 
-                btn.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i> Đã Lưu Thành Công';
+                btn.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i> Đã lưu thành công';
             } else {
                 alert("Lỗi khi lưu: " + result.message);
                 btn.innerHTML = originalText;

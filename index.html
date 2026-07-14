@@ -211,7 +211,16 @@
                 currentCCCD = cccd;
                 currentHoTen = result.hocSinh.hoTen;
                 document.getElementById('tt-hoten').innerText = result.hocSinh.hoTen;
-                document.getElementById('tt-ngaysinh').innerText = result.hocSinh.ngaySinh;
+                // Xử lý định dạng ngày sinh
+                let rawDate = result.hocSinh.ngaySinh;
+                if (rawDate && rawDate.includes('T')) {
+                    let d = new Date(rawDate);
+                    let day = d.getDate().toString().padStart(2, '0');
+                    let month = (d.getMonth() + 1).toString().padStart(2, '0');
+                    let year = d.getFullYear();
+                    rawDate = `${day}/${month}/${year}`;
+                }
+                document.getElementById('tt-ngaysinh').innerText = rawDate;
                 document.getElementById('tt-dantoc').innerText = result.hocSinh.danToc;
                 document.getElementById('tt-gioitinh').innerText = result.hocSinh.gioiTinh;
                 document.getElementById('tt-truong').innerText = result.hocSinh.truong;

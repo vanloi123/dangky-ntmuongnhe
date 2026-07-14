@@ -43,7 +43,7 @@
                 <div class="card-body p-4 p-md-5" id="sectionSearch">
                     <div class="mb-4">
                         <label class="form-label fw-bold text-secondary mb-2 ms-2">Nhập số Căn cước công dân (CCCD):</label>
-                        <input type="text" class="form-control input-custom" id="inputCCCD" placeholder="Nhập đủ 12 số CCCD" onkeypress="if(event.key === 'Enter') traCuu()">
+                        <input type="text" class="form-control input-custom" id="inputCCCD" placeholder="Nhập số CCCD của học sinh" onkeypress="if(event.key === 'Enter') traCuu()">
                     </div>
                     <button onclick="traCuu()" class="btn btn-primary btn-custom w-100 fs-5 text-white" id="btnTraCuu">
                         Tra cứu & Đăng ký
@@ -63,7 +63,7 @@
                     </div>
                     <hr class="mt-0 mb-3 text-muted">
                     <div class="row g-3">
-                        <div class="col-12"><div class="info-label">Họ tên thí sinh</div><div class="info-value" id="tt-hoten"></div></div>
+                        <div class="col-12"><div class="info-label">Họ tên thí sinh</div><div class="info-value text-primary fs-5" id="tt-hoten"></div></div>
                         <div class="col-6"><div class="info-label">Ngày sinh</div><div class="info-value" id="tt-ngaysinh"></div></div>
                         <div class="col-6"><div class="info-label">Dân tộc</div><div class="info-value" id="tt-dantoc"></div></div>
                         <div class="col-6"><div class="info-label">Giới tính</div><div class="info-value" id="tt-gioitinh"></div></div>
@@ -81,7 +81,7 @@
                     <hr class="mt-0 mb-3 text-muted">
                     <div class="table-responsive">
                         <table class="table table-bordered align-middle">
-                            <thead class="table-light"><tr><th width="25%">Lớp</th><th>Tổ hợp môn lựa chọn</th></tr></thead>
+                            <thead class="table-light"><tr><th width="25%" class="text-center">Lớp</th><th>Tổ hợp môn lựa chọn</th></tr></thead>
                             <tbody>
                                 <tr><td class="fw-bold text-center">10A1</td><td><span class="subject-badge">Vật lý</span> <span class="subject-badge">Hóa học</span> <span class="subject-badge">Sinh học</span> <span class="subject-badge">Tin học</span></td></tr>
                                 <tr><td class="fw-bold text-center">10A2</td><td><span class="subject-badge">Vật lý</span> <span class="subject-badge">Hóa học</span> <span class="subject-badge">Sinh học</span> <span class="subject-badge">KTNN</span></td></tr>
@@ -126,22 +126,67 @@
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
 
+<!-- ================= MODAL CHÚC MỪNG ================= -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg" style="border-radius: 20px; border: none;">
+            <div class="modal-header text-white" style="background: linear-gradient(135deg, #0ba360 0%, #3cba92 100%); border-radius: 20px 20px 0 0; padding: 1.5rem;">
+                <h5 class="modal-title fw-bold"><i class="bi bi-check-circle-fill me-2"></i>Đăng ký thành công</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+            <div class="modal-body p-4">
+                <p class="text-center text-muted mb-1">Chúc mừng học sinh:</p>
+                <h4 class="text-center text-primary mb-4 fw-bold text-uppercase" id="modal-hoten"></h4>
+                
+                <div class="alert alert-success border-success border-2 text-center py-3 mb-4" style="border-radius: 12px; background-color: #f0fff4;">
+                    <div class="fw-bold text-success mb-2" style="font-size: 0.95rem;"><i class="bi bi-star-fill text-warning me-2"></i>Nguyện vọng 1 (Ưu tiên)</div>
+                    <div class="display-6 fw-bold text-success" id="modal-nv1"></div>
+                </div>
+                
+                <p class="fw-bold text-secondary mb-2" style="font-size: 0.9rem;">Các nguyện vọng tiếp theo:</p>
+                <ul class="list-group list-group-flush border rounded-3 overflow-hidden">
+                    <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
+                        <span class="text-muted fw-medium">Nguyện vọng 2</span>
+                        <span class="badge bg-secondary rounded-pill fs-6" id="modal-nv2"></span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span class="text-muted fw-medium">Nguyện vọng 3</span>
+                        <span class="badge bg-secondary rounded-pill fs-6" id="modal-nv3"></span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
+                        <span class="text-muted fw-medium">Nguyện vọng 4</span>
+                        <span class="badge bg-secondary rounded-pill fs-6" id="modal-nv4"></span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span class="text-muted fw-medium">Nguyện vọng 5</span>
+                        <span class="badge bg-secondary rounded-pill fs-6" id="modal-nv5"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer justify-content-center border-0 pb-4 pt-0">
+                <button type="button" class="btn btn-primary btn-custom px-5 rounded-pill" data-bs-dismiss="modal">Đã hiểu & Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Thư viện Javascript của Bootstrap (Bắt buộc phải có để Modal hoạt động) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
     // ========================================================
-    // CÔ NGÂN DÁN ĐƯỜNG LINK WEB APP TỪ BƯỚC 2 VÀO ĐÂY:
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxnquBuFXB8KERiVSLrtSfRv9WmIib8Ko9VYb1Jz9vriIparcvIlJmADnu1qSGU72ZhdQ/exec';
+    // CÔ NGÂN DÁN ĐƯỜNG LINK WEB APP VÀO ĐÂY:
+    const WEB_APP_URL = 'DÁN_LINK_WEB_APP_CỦA_CÔ_VÀO_ĐÂY';
     // ========================================================
 
     const classes = ['Chọn lớp', '10A1', '10A2', '10A3', '10A4', '10A5'];
     let currentHoTen = "";
     let currentCCCD = "";
 
-    // Hàm tạo dropdown và gắn sự kiện chống trùng
     function loadDropdowns() {
         for(let i=1; i<=5; i++) {
             let select = document.getElementById('nv' + i);
@@ -152,12 +197,10 @@
                 option.text = cls;
                 select.add(option);
             });
-            // Gắn sự kiện: Mỗi khi thay đổi lựa chọn sẽ chạy hàm kiểm tra
             select.addEventListener('change', kiemTraTrungLap);
         }
     }
 
-    // TÍNH NĂNG MỚI: Tự động khóa các lớp đã được chọn
     function kiemTraTrungLap() {
         const dropdowns = [
             document.getElementById('nv1'), document.getElementById('nv2'), 
@@ -165,19 +208,16 @@
             document.getElementById('nv5')
         ];
         
-        // Lấy danh sách tên các lớp đang được chọn (bỏ qua ô trống)
         const selectedClasses = dropdowns.map(dd => dd.value).filter(val => val !== "");
 
-        // Quét qua từng ô chọn
         dropdowns.forEach(dd => {
             Array.from(dd.options).forEach(option => {
-                // Nếu lớp này nằm trong danh sách đã chọn, VÀ không phải là lựa chọn của chính ô hiện tại -> Khóa lại
                 if (option.value !== "" && selectedClasses.includes(option.value) && option.value !== dd.value) {
                     option.disabled = true;
-                    option.style.color = "#adb5bd"; // Đổi màu chữ cho mờ đi
+                    option.style.color = "#adb5bd";
                 } else {
                     option.disabled = false;
-                    option.style.color = ""; // Khôi phục màu bình thường
+                    option.style.color = ""; 
                 }
             });
         });
@@ -190,13 +230,15 @@
         const msg = document.getElementById("msgSearch");
         const btn = document.getElementById("btnTraCuu");
         
+        document.getElementById("inputCCCD").blur();
+        
         if (!cccd || cccd.length < 9) {
-            msg.innerHTML = `<span class="text-danger"><i class="bi bi-exclamation-triangle-fill"></i> Vui lòng nhập đúng số CCCD</span>`;
+            msg.innerHTML = `<div class="alert alert-danger mt-3 py-2"><i class="bi bi-exclamation-triangle-fill"></i> Vui lòng nhập đúng số CCCD</div>`;
             return;
         }
 
         btn.disabled = true;
-        msg.innerHTML = `<span class="text-primary spinner-border spinner-border-sm me-2" role="status"></span>Đang kiểm tra dữ liệu...`;
+        msg.innerHTML = `<div class="text-primary mt-3"><span class="spinner-border spinner-border-sm me-2" role="status"></span>Đang kiểm tra dữ liệu...</div>`;
         document.getElementById("sectionForm").classList.add("hidden");
 
         try {
@@ -210,8 +252,8 @@
             if (result.success) {
                 currentCCCD = cccd;
                 currentHoTen = result.hocSinh.hoTen;
-                document.getElementById('tt-hoten').innerText = result.hocSinh.hoTen;
-                // Xử lý định dạng ngày sinh
+                
+                // Thuật toán xử lý ngày sinh, dịch từ giờ quốc tế sang ngày chuẩn Việt Nam
                 let rawDate = result.hocSinh.ngaySinh;
                 if (rawDate && rawDate.includes('T')) {
                     let d = new Date(rawDate);
@@ -220,6 +262,8 @@
                     let year = d.getFullYear();
                     rawDate = `${day}/${month}/${year}`;
                 }
+                
+                document.getElementById('tt-hoten').innerText = result.hocSinh.hoTen;
                 document.getElementById('tt-ngaysinh').innerText = rawDate;
                 document.getElementById('tt-dantoc').innerText = result.hocSinh.danToc;
                 document.getElementById('tt-gioitinh').innerText = result.hocSinh.gioiTinh;
@@ -233,8 +277,6 @@
                     document.getElementById('nv4').value = result.nguyenVong.nv4;
                     document.getElementById('nv5').value = result.nguyenVong.nv5;
                     document.getElementById('btnSubmit').innerHTML = '<i class="bi bi-arrow-repeat me-2"></i> Cập Nhật Nguyện Vọng';
-                    
-                    // Cập nhật lại trạng thái mờ/sáng của các tùy chọn
                     kiemTraTrungLap();
                 } else {
                     document.getElementById('formNguyenVong').reset();
@@ -245,10 +287,10 @@
                 msg.innerHTML = '';
                 document.getElementById("sectionForm").classList.remove("hidden");
             } else {
-                msg.innerHTML = `<span class="text-danger"><i class="bi bi-x-circle-fill"></i> ${result.message}</span>`;
+                msg.innerHTML = `<div class="alert alert-danger mt-3 py-2"><i class="bi bi-x-circle-fill"></i> ${result.message}</div>`;
             }
         } catch (error) {
-            msg.innerHTML = `<span class="text-danger"><i class="bi bi-wifi-off"></i> Lỗi kết nối hệ thống.</span>`;
+            msg.innerHTML = `<div class="alert alert-danger mt-3 py-2"><i class="bi bi-wifi-off"></i> Lỗi kết nối hệ thống. Xin vui lòng thử lại.</div>`;
         }
         btn.disabled = false;
     }
@@ -260,13 +302,11 @@
         const nv4 = document.getElementById('nv4').value;
         const nv5 = document.getElementById('nv5').value;
 
-        // 1. Kiểm tra đã điền đủ chưa
         if(!nv1 || !nv2 || !nv3 || !nv4 || !nv5) {
             alert("Vui lòng chọn đầy đủ cả 5 nguyện vọng!");
             return;
         }
 
-        // 2. Chốt chặn an toàn: Kiểm tra trùng lặp
         const uniqueSelections = new Set([nv1, nv2, nv3, nv4, nv5]);
         if (uniqueSelections.size < 5) {
             alert("Lỗi: Các nguyện vọng không được trùng lớp nhau. Vui lòng kiểm tra lại!");
@@ -290,7 +330,18 @@
             const result = await response.json();
 
             if (result.success) {
-                alert("Chúc mừng! Đã lưu nguyện vọng thành công.");
+                // Điền dữ liệu vào Cửa sổ nổi (Modal)
+                document.getElementById('modal-hoten').innerText = currentHoTen;
+                document.getElementById('modal-nv1').innerText = nv1;
+                document.getElementById('modal-nv2').innerText = nv2;
+                document.getElementById('modal-nv3').innerText = nv3;
+                document.getElementById('modal-nv4').innerText = nv4;
+                document.getElementById('modal-nv5').innerText = nv5;
+                
+                // Hiển thị Cửa sổ nổi
+                var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                successModal.show();
+
                 btn.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i> Đã Lưu Thành Công';
                 btn.classList.replace('btn-success', 'btn-primary');
             } else {
@@ -298,7 +349,7 @@
                 btn.innerHTML = originalText;
             }
         } catch (error) {
-            alert("Lỗi kết nối mạng!");
+            alert("Lỗi kết nối mạng! Không thể gửi dữ liệu.");
             btn.innerHTML = originalText;
         }
         btn.disabled = false;

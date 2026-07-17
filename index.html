@@ -384,61 +384,74 @@
     }
 
     async function luuNguyenVong() {
-        const nv1 = document.getElementById('nv1').value;
-        const nv2 = document.getElementById('nv2').value;
-        const nv3 = document.getElementById('nv3').value;
-        const nv4 = document.getElementById('nv4').value;
-        const nv5 = document.getElementById('nv5').value;
+    const nv1 = document.getElementById('nv1').value;
+    const nv2 = document.getElementById('nv2').value;
+    const nv3 = document.getElementById('nv3').value;
+    const nv4 = document.getElementById('nv4').value;
+    const nv5 = document.getElementById('nv5').value;
 
-        if(!nv1 || !nv2 || !nv3 || !nv4 || !nv5) {
-            alert("Vui lòng chọn đầy đủ cả 5 nguyện vọng!");
-            return;
-        }
+    // Bắt buộc phải chọn ít nhất 2 nguyện vọng
+    const soNguyenVong = [nv1, nv2, nv3, nv4, nv5].filter(nv => nv).length;
+    if (soNguyenVong < 2) {
+        alert("Vui lòng chọn ít nhất 2 nguyện vọng!");
+        return;
+    }
 
-        const uniqueSelections = new Set([nv1, nv2, nv3, nv4, nv5]);
-        if (uniqueSelections.size < 5) {
-            alert("Lỗi: Các nguyện vọng không được trùng lớp nhau. Vui lòng kiểm tra lại!");
-            return;
-        }
+    /*
+    // Kiểm tra không được trùng nguyện vọng (nếu cần)
+    const daChon = [nv1, nv2, nv3, nv4, nv5].filter(nv => nv);
+    if (new Set(daChon).size !== daChon.length) {
+        alert("Lỗi: Các nguyện vọng không được trùng lớp nhau. Vui lòng kiểm tra lại!");
+        return;
+    }
+    */
 
-        const btn = document.getElementById("btnSubmit");
-        const originalText = btn.innerHTML;
-        btn.disabled = true;
-        btn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> Đang xử lý...`;
+    const btn = document.getElementById("btnSubmit");
+    const originalText = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> Đang xử lý...`;
 
-        try {
-            const response = await fetch(WEB_APP_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: JSON.stringify({ 
-                    action: 'luu_nguyen_vong', cccd: currentCCCD, hoTen: currentHoTen,
-                    nv1: nv1, nv2: nv2, nv3: nv3, nv4: nv4, nv5: nv5
-                })
-            });
-            const result = await response.json();
+    try {
+        const response = await fetch(WEB_APP_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({
+                action: 'luu_nguyen_vong',
+                cccd: currentCCCD,
+                hoTen: currentHoTen,
+                nv1: nv1,
+                nv2: nv2,
+                nv3: nv3,
+                nv4: nv4,
+                nv5: nv5
+            })
+        });
 
-            if (result.success) {
-                document.getElementById('modal-hoten').innerText = currentHoTen;
-                document.getElementById('modal-nv1').innerText = nv1;
-                document.getElementById('modal-nv2').innerText = nv2;
-                document.getElementById('modal-nv3').innerText = nv3;
-                document.getElementById('modal-nv4').innerText = nv4;
-                document.getElementById('modal-nv5').innerText = nv5;
-                
-                var successModal = new bootstrap.Modal(document.getElementById('successModal'));
-                successModal.show();
+        const result = await response.json();
 
-                btn.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i> Đã lưu thành công';
-            } else {
-                alert("Lỗi khi lưu: " + result.message);
-                btn.innerHTML = originalText;
-            }
-        } catch (error) {
-            alert("Lỗi kết nối mạng! Không thể gửi dữ liệu.");
+        if (result.success) {
+            document.getElementById('modal-hoten').innerText = currentHoTen;
+            document.getElementById('modal-nv1').innerText = nv1 || "Không chọn";
+            document.getElementById('modal-nv2').innerText = nv2 || "Không chọn";
+            document.getElementById('modal-nv3').innerText = nv3 || "Không chọn";
+            document.getElementById('modal-nv4').innerText = nv4 || "Không chọn";
+            document.getElementById('modal-nv5').innerText = nv5 || "Không chọn";
+
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+
+            btn.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i> Đã lưu thành công';
+        } else {
+            alert("Lỗi khi lưu: " + result.message);
             btn.innerHTML = originalText;
         }
+    } catch (error) {
+        alert("Lỗi kết nối mạng! Không thể gửi dữ liệu.");
+        btn.innerHTML = originalText;
+    } finally {
         btn.disabled = false;
     }
+}
 </script>
 </body>
 </html>

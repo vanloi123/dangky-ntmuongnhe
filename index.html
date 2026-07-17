@@ -97,7 +97,7 @@
 
     <!-- =================== MỤC 2.1 =================== -->
     <h6 class="fw-bold text-primary mb-3">
-        2.1. Các môn học bắt buộc
+        2.1. Các môn học/ Hoạt động giáo dục bắt buộc
     </h6>
 
     <div class="card bg-light border-0 shadow-sm mb-4">
@@ -117,7 +117,7 @@
 
     <!-- =================== MỤC 2.2 =================== -->
     <h6 class="fw-bold text-primary mb-3">
-        2.2. Danh sách lớp và tổ hợp môn lựa chọn
+        2.2. Các môn lựa chọn và chuyên đề học tập tương ứng với các lớp
     </h6>
 
     <div class="table-responsive">
@@ -304,11 +304,88 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+<div class="toast-container position-fixed top-0 end-0 p-3">
+
+    <div id="liveToast"
+         class="toast border-0 shadow"
+         role="alert"
+         aria-live="assertive"
+         aria-atomic="true">
+
+        <div class="toast-header">
+
+            <i id="toastIcon"
+               class="bi bi-info-circle-fill text-primary me-2"></i>
+
+            <strong class="me-auto"
+                    id="toastTitle">Thông báo</strong>
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="toast">
+            </button>
+
+        </div>
+
+        <div class="toast-body"
+             id="toastMessage">
+        </div>
+
+    </div>
+
+</div>
+
+
 <script>
     // ========================================================
-    // CÔ NGÂN DÁN ĐƯỜNG LINK WEB APP VÀO ĐÂY:
+   // LINK WEB APP VÀO ĐÂY:
     const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxnquBuFXB8KERiVSLrtSfRv9WmIib8Ko9VYb1Jz9vriIparcvIlJmADnu1qSGU72ZhdQ/exec';
     // ========================================================
+
+    function showToast(message, type = "danger") {
+
+    const toast = document.getElementById("liveToast");
+
+    const title = document.getElementById("toastTitle");
+
+    const icon = document.getElementById("toastIcon");
+
+    const body = document.getElementById("toastMessage");
+
+    toast.className = "toast border-0 shadow";
+
+    switch(type){
+
+        case "success":
+            toast.classList.add("bg-success","text-white");
+            icon.className="bi bi-check-circle-fill me-2";
+            title.innerText="Thành công";
+            break;
+
+        case "warning":
+            toast.classList.add("bg-warning");
+            icon.className="bi bi-exclamation-triangle-fill me-2";
+            title.innerText="Thông báo";
+            break;
+
+        case "danger":
+            toast.classList.add("bg-danger","text-white");
+            icon.className="bi bi-x-circle-fill me-2";
+            title.innerText="Lỗi";
+            break;
+
+        default:
+            toast.classList.add("bg-primary","text-white");
+            icon.className="bi bi-info-circle-fill me-2";
+            title.innerText="Thông báo";
+    }
+
+    body.innerText = message;
+
+    new bootstrap.Toast(toast,{
+        delay:4000
+    }).show();
+}
 
     const classes = ['Chọn lớp', '10A1', '10A2', '10A3', '10A4', '10A5'];
     let currentHoTen = "";
@@ -431,7 +508,10 @@
     // Bắt buộc phải chọn ít nhất 2 nguyện vọng
     const soNguyenVong = [nv1, nv2, nv3, nv4, nv5].filter(nv => nv).length;
     if (soNguyenVong < 2) {
-        alert("Vui lòng chọn ít nhất 2 nguyện vọng trở lên!");
+        showToast(
+            "Vui lòng chọn ít nhất 2 nguyện vọng trở lên!",
+            "warning"
+        );
         return;
     }
 
@@ -480,11 +560,17 @@
 
             btn.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i> Đã lưu thành công';
         } else {
-            alert("Lỗi khi lưu: " + result.message);
+            showToast(
+                    "Lỗi khi lưu: " + result.message,
+                    "danger"
+                );
             btn.innerHTML = originalText;
         }
     } catch (error) {
-        alert("Lỗi kết nối mạng! Không thể gửi dữ liệu.");
+        showToast(
+                "Lỗi kết nối mạng! Không thể gửi dữ liệu.",
+                "danger"
+            );
         btn.innerHTML = originalText;
     } finally {
         btn.disabled = false;

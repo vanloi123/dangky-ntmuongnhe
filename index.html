@@ -74,6 +74,25 @@
 
         .search-note { font-size: 0.85rem; color: rgba(255,255,255,0.85); margin-top: 0.9rem; text-align: center; }
 
+        /* Khối kết quả sau khi bấm Tra cứu: nền trắng, bo góc nối liền phần đáy banner ảnh, tạo hiệu ứng "tấm phủ" hiện đại */
+        #sectionForm.results-panel {
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+            padding: 1.75rem 1.25rem 1.25rem;
+            margin-top: -2rem;
+            position: relative;
+            z-index: 2;
+        }
+        #sectionForm.results-panel .card-custom { box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+
+        /* Modal "Đăng ký thành công" kiểu kính mờ (glassmorphism), đồng bộ với khối tra cứu ban đầu */
+        .success-modal-content { border-radius: 24px; border: 1px solid rgba(255,255,255,0.5); background: rgba(255,255,255,0.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 25px 60px rgba(0,0,0,0.4); overflow: hidden; animation: heroFadeIn 0.35s ease-out; }
+        .success-modal-header { position: relative; background: linear-gradient(135deg, #039ea8 0%, #05d4e3 100%); padding: 2rem 1.5rem 1.75rem; }
+        .success-icon-badge { width: 60px; height: 60px; border-radius: 50%; background: rgba(255,255,255,0.22); border: 1px solid rgba(255,255,255,0.4); display: flex; align-items: center; justify-content: center; font-size: 1.7rem; color: #ffffff; margin: 0 auto; }
+        .success-eyebrow { display: inline-block; color: #ffffff; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.35); backdrop-filter: blur(6px); padding: 6px 16px; border-radius: 999px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px; margin-top: 0.85rem; text-transform: uppercase; }
+        .modal-nv1-box { border-radius: 16px; background: linear-gradient(135deg, rgba(3,158,168,0.08) 0%, rgba(5,212,227,0.14) 100%); border: 2px solid rgba(5,212,227,0.45); box-shadow: 0 10px 25px rgba(3,158,168,0.12); }
+
         /* Footer bản quyền cuối trang, giống ảnh mẫu */
         .site-footer { background: #f0f2f5; color: #6c757d; font-size: 0.85rem; padding: 1.5rem 1rem 2rem; }
         .site-footer a { color: #039ea8; }
@@ -124,18 +143,18 @@
                     Tra cứu
                 </button>
             </div>
-            <div class="search-note">Cần nhập chính xác số Căn cước công dân của bạn (Chỉ học sinh trúng tuyển mới đăng ký được).</div>
+            <div class="search-note">Cần nhập chính xác số Căn cước công dân của bạn (Chỉ học sinh trúng tuyển mới đăng ký được)</div>
             <div id="msgSearch" class="mt-3 text-center"></div>
         </div>
     </div>
 </div>
 
-<div class="container px-2 px-sm-3">
+<div class="container px-2 px-sm-3 pb-4">
     <div class="row justify-content-center m-0">
         <div class="col-lg-8 col-md-10 p-0">
 
             <!-- NỘI DUNG ĐĂNG KÝ (ẨN BAN ĐẦU) -->
-            <div id="sectionForm" class="hidden pt-4">
+            <div id="sectionForm" class="hidden results-panel">
                 
                 <!-- PHẦN 1: THÔNG TIN CHUNG -->
                 <div class="card card-custom p-4">
@@ -330,16 +349,17 @@
 <!-- ================= MODAL CHÚC MỪNG ================= -->
 <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content shadow-lg" style="border-radius: 20px; border: none;">
-            <div class="modal-header text-white" style="background: linear-gradient(135deg, #039ea8 0%, #05d4e3 100%); border-radius: 20px 20px 0 0; padding: 1.5rem;">
-                <h5 class="modal-title fw-bold"><i class="bi bi-check-circle-fill me-2"></i>Đăng ký thành công</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Đóng"></button>
+        <div class="modal-content success-modal-content">
+            <div class="success-modal-header text-white text-center">
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Đóng" style="position: absolute; top: 1rem; right: 1rem;"></button>
+                <div class="success-icon-badge"><i class="bi bi-check-lg"></i></div>
+                <span class="success-eyebrow">Đăng ký thành công</span>
             </div>
             <div class="modal-body p-4">
                 <p class="text-center text-muted mb-1">Chúc mừng học sinh:</p>
                 <h4 class="text-center text-primary mb-4 fw-bold text-uppercase" id="modal-hoten"></h4>
                 
-                <div class="alert text-center py-3 mb-4" style="border-radius: 12px; background-color: rgba(5, 212, 227, 0.1); border: 2px solid #05d4e3;">
+                <div class="modal-nv1-box text-center py-3 mb-4">
                     <div class="fw-bold text-primary mb-2" style="font-size: 0.95rem;"><i class="bi bi-star-fill text-warning me-2"></i>Nguyện vọng 1 (Ưu tiên)</div>
                     <div class="display-6 fw-bold text-primary" id="modal-nv1"></div>
                 </div>

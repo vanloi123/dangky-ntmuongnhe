@@ -28,10 +28,10 @@
         .card-custom { border: none; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); margin-bottom: 1.5rem; background: #ffffff; }
 
         /* Thanh trên cùng: logo + tên trường, nền trắng, full chiều rộng, giống ảnh mẫu */
-        .top-bar-custom { background: #ffffff; padding: 0.9rem 1.5rem; box-shadow: 0 2px 10px rgba(0,0,0,0.06); position: relative; z-index: 3; }
-        .school-logo-small { height: 46px; object-fit: contain; }
-        .top-bar-custom .school-name { color: #02828b; font-weight: 700; letter-spacing: 0.3px; font-size: 1.05rem; }
-        .top-bar-custom .school-name-sub { color: #6c757d; font-size: 0.8rem; }
+        .top-bar-custom { background: #ffffff; padding: 1.1rem 1.5rem; box-shadow: 0 2px 10px rgba(0,0,0,0.06); position: relative; z-index: 3; }
+        .school-logo-small { height: 60px; object-fit: contain; }
+        .top-bar-custom .school-name { color: #02828b; font-weight: 800; letter-spacing: 0.3px; font-size: 1.45rem; }
+        .top-bar-custom .school-name-sub { color: #6c757d; font-size: 0.98rem; }
 
         /* Banner ảnh cổng trường toàn màn hình, phủ gradient tối để chữ nổi bật + đường cong bo tròn đáy hiện đại */
         .hero-banner {
@@ -62,12 +62,17 @@
         .hero-content { position: relative; z-index: 1; max-width: 520px; width: 100%; animation: heroFadeIn 0.6s ease-out; }
         @keyframes heroFadeIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
-        .hero-eyebrow { display: inline-block; color: #ffffff; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.35); backdrop-filter: blur(6px); padding: 6px 16px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 1.1rem; text-transform: uppercase; }
-        .hero-title { color: #ffffff; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; font-size: 2.1rem; line-height: 1.25; text-shadow: 0 2px 12px rgba(0,0,0,0.45); margin-bottom: 0.75rem; }
-        .hero-sub { color: rgba(255,255,255,0.92); font-size: 1.02rem; margin-bottom: 1.9rem; text-shadow: 0 1px 6px rgba(0,0,0,0.35); }
+        .hero-eyebrow { display: inline-block; color: #ffffff; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.35); backdrop-filter: blur(6px); padding: 6px 16px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 1.25rem; text-transform: uppercase; }
+        .hero-title { color: #ffffff; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; font-size: 2.25rem; line-height: 1.25; text-shadow: 0 2px 12px rgba(0,0,0,0.45); margin-bottom: 0.6rem; }
+        .hero-sub { color: rgba(255,255,255,0.92); font-size: 1.05rem; margin-bottom: 2.1rem; text-shadow: 0 1px 6px rgba(0,0,0,0.35); }
 
         /* Khối tra cứu kiểu kính mờ (glassmorphism) hiện đại, nổi trên ảnh nền */
         .hero-search { max-width: 440px; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.35); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-radius: 20px; padding: 1.5rem; box-shadow: 0 20px 45px rgba(0,0,0,0.25); }
+
+        /* Nhãn rõ ràng phía trên ô nhập CCCD, giúp người dùng hiểu ngay cần nhập gì kể cả khi đã gõ chữ */
+        .hero-search-label { display: block; text-align: left; color: rgba(255,255,255,0.95); font-weight: 600; font-size: 0.88rem; margin-bottom: 0.6rem; text-shadow: 0 1px 4px rgba(0,0,0,0.35); }
+        .input-group-custom .input-group-text { background: #ffffff; border: none; border-radius: 12px 0 0 12px; color: #039ea8; font-size: 1.05rem; padding-right: 0.4rem; }
+        .input-group-custom .input-custom { border-left: none; padding-left: 0.4rem; }
 
         .school-logo { height: 70px; object-fit: contain; filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.2)); }
         .input-custom, .form-select-custom { border-radius: 12px; padding: 12px 20px; font-size: 1rem; border: 2px solid #e9ecef; box-shadow: none !important; }
@@ -81,7 +86,7 @@
 
         /* Ô nhập + nút Tra cứu nằm cùng một hàng, trên nền trắng đục, giống ảnh mẫu */
         .input-group-custom { box-shadow: 0 12px 28px rgba(0,0,0,0.18); border-radius: 12px; }
-        .input-group-custom .input-custom { border-radius: 12px 0 0 12px; border-right: none; background: #ffffff; }
+        .input-group-custom .input-custom { border-radius: 0; background: #ffffff; }
         .input-group-custom .btn-custom { border-radius: 0 12px 12px 0; white-space: nowrap; }
         .input-group-custom .input-custom:focus { box-shadow: none !important; }
 
@@ -121,14 +126,14 @@
         .subject-badge { background-color: rgba(5, 212, 227, 0.1); color: #039ea8; border-radius: 8px; padding: 5px 10px; font-size: 0.85rem; font-weight: 500; margin: 2px; display: inline-block; }
         
         @media (max-width: 768px) {
-            .hero-title { font-size: 1.55rem; }
+            .hero-title { font-size: 1.65rem; }
             .hero-banner { min-height: 56vh; padding: 3rem 0.75rem 3.5rem; border-radius: 0 0 24px 24px; }
             .hero-bg-photo { max-height: none; }
             .hero-search { padding: 1.1rem; border-radius: 16px; }
-            .top-bar-custom { padding: 0.75rem 1rem; }
-            .school-logo-small { height: 38px; }
-            .top-bar-custom .school-name { font-size: 0.88rem; }
-            .top-bar-custom .school-name-sub { font-size: 0.72rem; }
+            .top-bar-custom { padding: 0.85rem 1rem; }
+            .school-logo-small { height: 46px; }
+            .top-bar-custom .school-name { font-size: 1.05rem; }
+            .top-bar-custom .school-name-sub { font-size: 0.8rem; }
 
             /* Khối kết quả và 3 card Phần 1/2/3 chạm sát 2 mép màn hình, tăng padding bên trong để nội dung thoáng hơn */
             .container.px-2.px-sm-3 { padding-left: 0; padding-right: 0; }
@@ -157,10 +162,12 @@
         <p class="hero-sub">Trường PTDTNT THPT Mường Nhé</p>
 
         <div class="hero-search mx-auto" id="sectionSearch">
+            <label class="hero-search-label" for="inputCCCD">Số Căn cước công dân (CCCD)</label>
             <div class="input-group input-group-custom">
-                <input type="text" class="form-control input-custom" id="inputCCCD" placeholder="Nhập số CCCD" onkeypress="if(event.key === 'Enter') traCuu()">
+                <span class="input-group-text"><i class="bi bi-person-vcard"></i></span>
+                <input type="text" class="form-control input-custom" id="inputCCCD" placeholder="VD: 001234567890" onkeypress="if(event.key === 'Enter') traCuu()">
                 <button onclick="traCuu()" class="btn btn-custom text-white px-4" id="btnTraCuu">
-                    Tra cứu
+                    <i class="bi bi-search me-1"></i>Tra cứu
                 </button>
             </div>
             <div class="search-note">Cần nhập chính xác số Căn cước công dân của bạn</div>

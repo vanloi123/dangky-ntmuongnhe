@@ -452,6 +452,34 @@
             color: rgba(255,255,255,0.85); font-size: 0.82rem; margin: 0.55rem 0 0;
             position: relative; z-index: 1;
         }
+        .success-funny-line {
+            display: inline-flex; align-items: center; gap: 6px;
+            color: #fff; background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.35);
+            padding: 5px 14px; border-radius: 999px;
+            font-size: 0.82rem; font-weight: 700; margin-top: 0.65rem;
+            position: relative; z-index: 1; text-align: center;
+            animation: successPop .5s var(--ease);
+        }
+
+        /* ============ Theme hồng dành cho học sinh nữ ============ */
+        .success-modal-content.theme-pink {
+            --c-primary: #db2777;
+            --c-primary-2: #f472b6;
+            --c-primary-dark: #831843;
+            --c-accent: #f43f5e;
+            --c-accent-2: #fb7185;
+        }
+        .success-modal-content.theme-pink .modal-nv1-box {
+            background: linear-gradient(135deg, rgba(219,39,119,0.08) 0%, rgba(244,114,182,0.14) 100%);
+            border-color: rgba(244,114,182,0.45);
+        }
+        .success-modal-content.theme-pink .nv1-badge {
+            box-shadow: 0 6px 14px rgba(219,39,119,0.35);
+        }
+        .success-modal-content.theme-pink .btn-custom:hover {
+            box-shadow: 0 10px 24px rgba(219,39,119,0.4);
+        }
 
         .success-student { text-align: center; margin-bottom: 1.4rem; }
         .success-student-label {
@@ -794,6 +822,7 @@
                     <div class="success-icon-badge"><i class="bi bi-check-lg"></i></div>
                 </div>
                 <span class="success-eyebrow">Đăng ký thành công</span>
+                <div><span class="success-funny-line" id="modal-funny-line"></span></div>
                 <p class="success-header-sub">Hệ thống đã ghi nhận nguyện vọng của bạn</p>
             </div>
             <div class="modal-body p-4">
@@ -837,7 +866,7 @@
             </div>
             <div class="modal-footer flex-column border-0 pb-4 pt-0">
                 <button type="button" class="btn btn-primary btn-custom w-100 rounded-pill text-white mb-2" data-bs-dismiss="modal">Đóng</button>
-                <div class="success-footer-hint"><i class="bi bi-arrow-repeat"></i> Bạn có thể chỉnh sửa bất cứ lúc nào trước hạn chót</div>
+                <div class="success-footer-hint"><i class="bi bi-arrow-repeat"></i> Có thể tra cứu lại để chỉnh sửa bất cứ lúc nào</div>
             </div>
         </div>
     </div>
@@ -930,6 +959,46 @@
     const classes = ['Chọn lớp', '10A1', '10A2', '10A3', '10A4', '10A5'];
     let currentHoTen = "";
     let currentCCCD = "";
+    let currentGioiTinh = "";
+
+    // Danh sách caption hài hước hiển thị trong popup đăng ký thành công
+    const funnyRegisterLines = [        
+        "🎉 Deadline bài tập chính thức có địa chỉ thường trú mới!",        
+        "😴 Lớp mới bàn mới, nhưng buồn ngủ giờ Toán thì đừng như cũ nhé!",        
+        "📚 Chào mừng đến ngôi nhà chung — nơi trốn học khó hơn trốn wifi yếu!",        
+        "🪑 Ghế đã có chủ, cặp đã có ngăn, chỉ thiếu mỗi... ý chí học bài của bạn!",       
+        "✍️ Từ hôm nay thầy cô chủ nhiệm sẽ nhớ mặt bạn nhanh hơn cả người yêu cũ!",        
+        "🔔 Nguyện vọng đã chốt, giờ chỉ còn nguyện vọng được ngủ đủ giấc!",        
+        "📝 Chúc mừng bạn chính thức có thêm lý do hợp lệ để dậy sớm mỗi sáng!",        
+        "🚀 Lớp mới đã sẵn sàng, chỉ chờ bạn mang theo bút và trí nhớ siêu phàm!",        
+        "🎓 Cẩn thận: vào lớp mới có thể khiến bạn giỏi lên bất đắc dĩ đó nha!",        
+        "🏫 Chào lớp mới! Hứa hẹn nhiều bài kiểm tra 15 phút dài như 45 phút!",        
+        "📖 Sách giáo khoa đã sẵn sàng, chỉ chờ bạn... mở ra lần đầu tiên trong năm!",        
+        "🖊️ Chúc mừng! Bạn vừa chính thức gia nhập hội 'quên mang bút' toàn trường!",        
+        "🧮 Từ nay Toán, Lý, Tin sẽ luân phiên hỏi thăm sức khỏe tinh thần của bạn!",        
+        "🛎️ Tiếng trống trường sắp trở thành âm thanh ám ảnh nhất trong ngày!",        
+        "📐 Chào mừng đến lớp — nơi 'em quên làm bài' được dùng nhiều hơn cả tên riêng!",        
+        "🍞 Giờ ra chơi 5 phút, nhưng ăn sáng vẫn kịp nhờ tốc độ ánh sáng!",        
+        "🧑‍🏫 Cô giáo mới có siêu năng lực: phát hiện ai đang lướt ánh mắt về nhau!",        
+        "📅 Thời khóa biểu đã có, chỉ thiếu mỗi bộ nhớ để không quên tiết nào!",        
+        "🎒 Cặp sách nặng hơn, nhưng ước mơ thì chắc chắn còn nặng hơn thế!",        
+        "🖍️ Chúc bạn học giỏi và đừng để bài tập về nhà 'chờ' đến tối Chủ nhật!",        
+        "🧠 Bộ não chuẩn bị tinh thần tiếp nhận vô số công thức chưa từng dùng đến!",        
+        "⏰ Báo thức 6 giờ sáng từ hôm nay chính thức trở thành kẻ thù số một!",        
+        "📢 Cô chủ nhiệm gọi tên điểm danh sẽ nhanh hơn cả MC gọi tên trúng thưởng!",        
+        "🥇 Danh hiệu 'học sinh chăm chỉ' đang chờ, chỉ cần bạn dậy đúng giờ thôi!",        
+        "🧾 Sổ đầu bài mới tinh, mong ghi chú trong đó toàn lời khen chứ không phải... khác!",        
+        "🎨 Giờ Tin học sắp tới hứa hẹn nhiều dòng code 'trừu tượng' đến khó tả!",        
+        "🥪 Căng tin trường đang chờ đón vị khách quen mới toanh là bạn đấy!",        
+        "📌 Ghim lại lời hứa: 'Kỳ này con học chăm' — để lát nữa còn nhớ mà thực hiện!"       
+        ];
+
+    function hienThiCaptionHaiHuoc() {
+        const el = document.getElementById('modal-funny-line');
+        if (!el) return;
+        const idx = Math.floor(Math.random() * funnyRegisterLines.length);
+        el.innerText = funnyRegisterLines[idx];
+    }
 
     function loadDropdowns() {
         for(let i=1; i<=5; i++) {
@@ -996,6 +1065,7 @@
             if (result.success) {
                 currentCCCD = cccd;
                 currentHoTen = result.hocSinh.hoTen;
+                currentGioiTinh = result.hocSinh.gioiTinh || "";
                 
                 let rawDate = result.hocSinh.ngaySinh;
                 if (rawDate && rawDate.includes('T')) {
@@ -1095,6 +1165,14 @@
             document.getElementById('modal-nv4').innerText = nv4 || "Không chọn";
             document.getElementById('modal-nv5').innerText = nv5 || "Không chọn";
 
+            // Đổi giao diện màu hồng nếu học sinh nữ, màu mặc định nếu nam
+            const modalContent = document.querySelector('#successModal .success-modal-content');
+            const laNu = (currentGioiTinh || "").toLowerCase().includes("nữ");
+            modalContent.classList.toggle('theme-pink', laNu);
+
+            // Hiển thị 1 dòng caption hài hước ngẫu nhiên
+            hienThiCaptionHaiHuoc();
+
             const successModal = new bootstrap.Modal(document.getElementById('successModal'));
             successModal.show();
 
@@ -1120,7 +1198,7 @@
 
 <!-- FOOTER BẢN QUYỀN -->
 <footer class="site-footer text-center">
-    <i class="bi bi-mortarboard-fill me-1"></i> &copy; 2026 Trường PTDTNT THPT Mường Nhé. Phát triển bởi <span class="fw-semibold">Nhóm CNTT</span>
+    <i class="bi bi-mortarboard-fill me-1"></i> &copy; 2026 Trường PTDTNT THPT Mường Nhé. Phát triển bởi <span class="fw-semibold">Nhóm CNTT</span>.
 </footer>
 
 </body>

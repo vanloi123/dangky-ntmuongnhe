@@ -393,6 +393,16 @@
         .submit-hint i { color: var(--c-primary); }
 
         /* ============ Modal thành công ============ */
+        #successModal .modal-dialog {
+            max-width: 380px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @media (max-width: 400px) {
+            #successModal .modal-dialog {
+                max-width: calc(100% - 24px);
+            }
+        }
         .success-modal-content {
             border-radius: var(--radius-xl); border: 1px solid rgba(255,255,255,0.5);
             background: rgba(255,255,255,0.98);
@@ -404,18 +414,18 @@
             position: relative; text-align: center; overflow: hidden;
             background: radial-gradient(120% 140% at 20% -10%, rgba(255,255,255,0.22), transparent 60%),
                         linear-gradient(135deg, var(--c-primary) 0%, var(--c-primary-2) 100%);
-            padding: 2.4rem 1.5rem 2.1rem;
+            padding: 1.5rem 1.1rem 1.3rem;
         }
         .success-modal-header::before,
         .success-modal-header::after {
             content: ""; position: absolute; border-radius: 50%;
             background: rgba(255,255,255,0.14); pointer-events: none;
         }
-        .success-modal-header::before { width: 140px; height: 140px; top: -60px; left: -40px; }
-        .success-modal-header::after { width: 100px; height: 100px; bottom: -50px; right: -20px; }
+        .success-modal-header::before { width: 110px; height: 110px; top: -50px; left: -30px; }
+        .success-modal-header::after { width: 80px; height: 80px; bottom: -40px; right: -15px; }
 
         .success-icon-wrap {
-            position: relative; width: 68px; height: 68px; margin: 0 auto;
+            position: relative; width: 50px; height: 50px; margin: 0 auto;
             display: flex; align-items: center; justify-content: center;
         }
         .success-icon-ring {
@@ -429,10 +439,10 @@
         }
         .success-icon-badge {
             position: relative; z-index: 1;
-            width: 62px; height: 62px; border-radius: 50%;
+            width: 46px; height: 46px; border-radius: 50%;
             background: rgba(255,255,255,0.22); border: 1px solid rgba(255,255,255,0.45);
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.75rem; color: #fff;
+            font-size: 1.3rem; color: #fff;
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
             animation: successPop .5s var(--ease);
         }
@@ -444,20 +454,21 @@
         .success-eyebrow {
             display: inline-block; color: #fff; background: rgba(255,255,255,0.18);
             border: 1px solid rgba(255,255,255,0.35); backdrop-filter: blur(6px);
-            padding: 6px 16px; border-radius: 999px; font-size: 0.8rem; font-weight: 700;
-            letter-spacing: 0.5px; margin-top: 1rem; text-transform: uppercase;
+            padding: 4px 12px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 0.5px; margin-top: 0.6rem; text-transform: uppercase;
             position: relative; z-index: 1;
         }
         .success-header-sub {
-            color: rgba(255,255,255,0.85); font-size: 0.82rem; margin: 0.55rem 0 0;
+            color: rgba(255,255,255,0.85); font-size: 0.74rem; margin: 0.35rem 0 0;
             position: relative; z-index: 1;
         }
         .success-funny-line {
             display: inline-flex; align-items: center; gap: 6px;
             color: #fff; background: rgba(255,255,255,0.2);
             border: 1px solid rgba(255,255,255,0.35);
-            padding: 5px 14px; border-radius: 999px;
-            font-size: 0.82rem; font-weight: 700; margin-top: 0.65rem;
+            padding: 5px 12px; border-radius: 12px;
+            font-size: 0.74rem; font-weight: 700; line-height: 1.35;
+            margin-top: 0.45rem; max-width: 92%;
             position: relative; z-index: 1; text-align: center;
             animation: successPop .5s var(--ease);
         }
@@ -481,59 +492,59 @@
             box-shadow: 0 10px 24px rgba(219,39,119,0.4);
         }
 
-        .success-student { text-align: center; margin-bottom: 1.4rem; }
+        .success-student { text-align: center; margin-bottom: 0.9rem; }
         .success-student-label {
-            font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .4px;
-            color: var(--c-ink-soft); margin-bottom: 0.2rem;
+            font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .4px;
+            color: var(--c-ink-soft); margin-bottom: 0.15rem;
         }
-        .success-student-name { color: var(--c-ink); font-weight: 800; text-transform: uppercase; margin: 0; }
+        .success-student-name { color: var(--c-ink); font-weight: 800; text-transform: uppercase; margin: 0; font-size: 1.05rem; }
 
         .modal-nv1-box {
             border-radius: var(--radius-md);
             background: linear-gradient(135deg, rgba(8,145,178,0.08) 0%, rgba(6,182,212,0.14) 100%);
             border: 2px solid rgba(6,182,212,0.4);
             box-shadow: var(--shadow-soft);
-            display: flex; align-items: center; gap: 14px;
-            padding: 1rem 1.1rem;
+            display: flex; align-items: center; gap: 12px;
+            padding: 0.7rem 0.9rem;
         }
         .nv1-badge {
-            flex: none; width: 46px; height: 46px; border-radius: 14px;
+            flex: none; width: 38px; height: 38px; border-radius: 12px;
             background: linear-gradient(135deg, var(--c-accent), var(--c-accent-2));
             color: #fff; display: flex; align-items: center; justify-content: center;
-            font-size: 1.3rem; box-shadow: 0 6px 14px rgba(245,158,11,0.35);
+            font-size: 1.05rem; box-shadow: 0 6px 14px rgba(245,158,11,0.35);
         }
-        .nv1-label { font-size: 0.76rem; font-weight: 700; color: var(--c-primary-dark); text-transform: uppercase; letter-spacing: .2px; }
-        .nv1-value { font-size: 1.4rem; font-weight: 800; color: var(--c-ink); line-height: 1.2; }
+        .nv1-label { font-size: 0.7rem; font-weight: 700; color: var(--c-primary-dark); text-transform: uppercase; letter-spacing: .2px; }
+        .nv1-value { font-size: 1.15rem; font-weight: 800; color: var(--c-ink); line-height: 1.2; }
 
         .success-nv-title {
-            font-weight: 700; color: var(--c-ink-soft); font-size: 0.82rem;
-            text-transform: uppercase; letter-spacing: .3px; margin: 1.3rem 0 0.7rem;
+            font-weight: 700; color: var(--c-ink-soft); font-size: 0.76rem;
+            text-transform: uppercase; letter-spacing: .3px; margin: 0.9rem 0 0.5rem;
         }
         .success-nv-list { border: 1px solid var(--c-line); border-radius: var(--radius-md); overflow: hidden; }
         .success-nv-item {
-            display: flex; align-items: center; gap: 10px;
-            padding: 0.65rem 0.9rem; border-bottom: 1px solid var(--c-line);
+            display: flex; align-items: center; gap: 8px;
+            padding: 0.45rem 0.75rem; border-bottom: 1px solid var(--c-line);
         }
         .success-nv-item:last-child { border-bottom: none; }
         .success-nv-item:nth-child(even) { background: var(--c-surface-2); }
         .success-nv-rank {
-            flex: none; width: 24px; height: 24px; border-radius: 50%;
+            flex: none; width: 20px; height: 20px; border-radius: 50%;
             background: var(--c-surface); border: 1.5px solid var(--c-line);
-            color: var(--c-ink-soft); font-size: 0.72rem; font-weight: 800;
+            color: var(--c-ink-soft); font-size: 0.66rem; font-weight: 800;
             display: flex; align-items: center; justify-content: center;
         }
-        .success-nv-text { flex: 1; color: var(--c-ink-soft); font-size: 0.88rem; font-weight: 500; }
+        .success-nv-text { flex: 1; color: var(--c-ink-soft); font-size: 0.8rem; font-weight: 500; }
         .success-nv-class {
-            font-weight: 800; font-size: 0.85rem; color: #fff;
+            font-weight: 800; font-size: 0.78rem; color: #fff;
             background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
-            padding: 4px 12px; border-radius: 999px;
+            padding: 3px 10px; border-radius: 999px;
         }
         .success-nv-class:empty::before { content: "—"; opacity: .6; }
 
         .success-footer-hint {
-            text-align: center; font-size: 0.78rem; color: var(--c-ink-soft);
+            text-align: center; font-size: 0.72rem; color: var(--c-ink-soft);
             display: flex; align-items: center; justify-content: center; gap: 6px;
-            margin-top: 0.3rem;
+            margin-top: 0.2rem;
         }
         .success-footer-hint i { color: var(--c-primary); }
 
@@ -825,7 +836,7 @@
                 <div><span class="success-funny-line" id="modal-funny-line"></span></div>
                 <p class="success-header-sub">Hệ thống đã ghi nhận nguyện vọng của bạn</p>
             </div>
-            <div class="modal-body p-4">
+            <div class="modal-body p-3">
 
                 <div class="success-student">
                     <div class="success-student-label">Học sinh</div>
@@ -864,8 +875,8 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer flex-column border-0 pb-4 pt-0">
-                <button type="button" class="btn btn-primary btn-custom w-100 rounded-pill text-white mb-2" data-bs-dismiss="modal">Đóng</button>
+            <div class="modal-footer flex-column border-0 pb-3 pt-0">
+                <button type="button" class="btn btn-primary btn-custom w-100 rounded-pill text-white mb-1" data-bs-dismiss="modal">Đóng</button>
                 <div class="success-footer-hint"><i class="bi bi-arrow-repeat"></i> Có thể tra cứu lại để chỉnh sửa bất cứ lúc nào</div>
             </div>
         </div>
